@@ -1,3 +1,6 @@
+
+from __future__ import print_function
+import sys
 import face_recognition
 from face_recognition_service.models.database import MemDatabase
 from face_recognition_service.models.face import Face
@@ -14,6 +17,7 @@ class FaceEngine:
         self.tolerance = 0.6
         self.enable_cnn = False
         self.__db = MemDatabase()
+        self.debug = True
 
     @property
     def faces(self):
@@ -52,14 +56,23 @@ class FaceEngine:
         return result
 
     def compare_faces(self, face_distances):
+        if self.debug:
+            print('compare face', file=sys.stdout)
         return list(face_distances <= self.tolerance)
 
     def delete_all_encodings(self):
         self.__db.face_dao.delete_all()
+        if self.debug:
+            print('delete all faces', file=sys.stdout)
 
     def delete_by_id(self, id):
+        self.debug
         self.__db.face_dao.delete_by_id(id)
+        if self.debug:
+            print('delete face: {}'.format(id), file=sys.stdout)
 
     def add_face(self, id, encoding):
         f = Face(id, encoding)
         self.__db.face_dao.append(f)
+        if self.debug:
+            print('add face: {}'.format(id), file=sys.stdout)

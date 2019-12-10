@@ -29,6 +29,7 @@ class FaceEncodingList(Resource):
 
         with tempfile.NamedTemporaryFile() as tmp:
             tmp.write(args['encoding_file'].read())
+            tmp.flush()
             tmp.seek(0)
             face_encoding = np.load(tmp.name, allow_pickle=True)
             engine.add_face(args['id'], face_encoding)

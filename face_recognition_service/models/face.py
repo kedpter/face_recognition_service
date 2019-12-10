@@ -14,6 +14,8 @@ class FaceDao:
     def __validate(self, obj):
         if not isinstance(obj, Face):
             raise Exception("Not a Face object")
+        if any(x.id == obj.id for x in self.__faces):
+            raise Exception("id ({}) already exists".format(obj.id))
 
     def append(self, obj):
         self.__validate(obj)

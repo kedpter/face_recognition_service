@@ -36,7 +36,7 @@ api.add_resource(HelloWorld, '{}/helloworld'.format(api_version), endpoint='hell
 
 api.add_resource(FaceEncodingList, '{0}/encodings'.format(face_module))
 
-api.add_resource(FaceEncoding, '{0}/encodings/<encoding_id>/'.format(face_module))
+api.add_resource(FaceEncoding, '{0}/encodings/<encoding_id>'.format(face_module))
 
 api.add_resource(Conversion, '{0}/conversions/encoding'.format(face_module))
 

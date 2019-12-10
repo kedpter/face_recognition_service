@@ -23,11 +23,16 @@ class Conversion(Resource):
         engine = FaceEngine()
 
         with tempfile.NamedTemporaryFile() as tmp:
+            # with open('upload.jpg', 'wb') as tmp:
             file = args['face_image']
             tmp.write(file.read())
+            tmp.flush()
 
             image = engine.load_image_file(tmp.name)
             encodings = engine.face_encodings(image)
+            if len(encodings) == 0:
+                return {'success': 'false', 'reason': 'no face in image'}
+
             # choose the first face
             encoding = encodings[0]
 
@@ -46,7 +51,3 @@ class Conversion(Resource):
                 mimetype='octet-stream',
                 headers={'Content-Disposition': 'attachment', 'filename': 'face.dat'}
             )
-
-            # with tempfile.NamedTemporaryFile() as np_file:
-            #     resp = send_file(np_file, mimetype='octet-stream')
-            # return resp

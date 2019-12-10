@@ -23,6 +23,7 @@ class CompareDistances(Resource):
 
         with tempfile.NamedTemporaryFile() as tmp:
             tmp.write(args['unknown_dat'].read())
+            tmp.flush()
             tmp.seek(0)
             unknown_encoding = np.load(tmp.name, allow_pickle=True)
             distances_json = engine.face_distance(unknown_encoding)
