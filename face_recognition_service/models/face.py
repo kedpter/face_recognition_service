@@ -1,3 +1,7 @@
+class DbException(Exception):
+    pass
+
+
 class Face:
     def __init__(self, id, encoding):
         self.id = id
@@ -13,9 +17,9 @@ class FaceDao:
 
     def __validate(self, obj):
         if not isinstance(obj, Face):
-            raise Exception("Not a Face object")
+            raise DbException("Not a Face object")
         if any(x.id == obj.id for x in self.__faces):
-            raise Exception("id ({}) already exists".format(obj.id))
+            raise DbException("id ({}) already exists".format(obj.id))
 
     def append(self, obj):
         self.__validate(obj)

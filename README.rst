@@ -1,29 +1,33 @@
-=============================
-face_recognition_service
-=============================
+
+FaceRecognitionService
+^^^^^^^^^^^^^^^^^^^^^^
 
 
 .. image:: https://img.shields.io/pypi/v/face_recognition_service.svg
-        :target: https://pypi.python.org/pypi/face_recognition_service
+   :target: https://img.shields.io/pypi/v/face_recognition_service.svg
+   :alt: alt text
+
 
 .. image:: https://img.shields.io/travis/kedpter/face_recognition_service.svg
-        :target: https://travis-ci.org/kedpter/face_recognition_service
-
-.. image:: https://readthedocs.org/projects/face-recognition-service/badge/?version=latest
-        :target: https://face-recognition-service.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
+   :target: https://img.shields.io/travis/kedpter/face_recognition_service.svg
+   :alt: alt text
 
 
+.. image:: https://readthedocs.org/projects/face_recognition_service/badge/?version=latest
+   :target: https://readthedocs.org/projects/face_recognition_service/badge/?version=latest
+   :alt: alt text
 
 
-face recognition api service
+A face recognition service built upon https://github.com/ageitgey/face_recognition.
 
+Install
+^^^^^^^
 
-* Free software: MIT license
-* Documentation: https://face-recognition-service.readthedocs.io.
+.. code-block:: bash
 
+   pip install face_recognition_service
 
-Features
---------
+Usage
+^^^^^
 
-* TODO
+Run server and open http://127.0.0.1:8080/ to see an example.

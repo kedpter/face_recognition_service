@@ -12,7 +12,7 @@ import os
 import numpy as np
 from flask import json
 
-from face_recognition_service.api import app, api, HelloWorld
+from face_recognition_service.api import app, api
 from face_recognition_service.resources.conversion import Conversion
 from face_recognition_service.resources.encodings import FaceEncodingList, FaceEncoding
 from face_recognition_service.face_engine import FaceEngine
@@ -21,17 +21,6 @@ from face_recognition_service.resources.configuration import Configuration
 
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
-
-
-class TestIntegrations(TestCase):
-    def setUp(self):
-        self.client = app.test_client()
-
-    def test_hello_world(self):
-        with app.test_request_context():
-            response = self.client.get(api.url_for(HelloWorld))
-            self.assertEqual(response.status_code, 200)
-            self.assertEqual(response.get_json()['response'], 'hello world')
 
 
 class TestConversion(TestCase):
