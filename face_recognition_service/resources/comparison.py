@@ -3,6 +3,7 @@ import werkzeug
 import tempfile
 import numpy as np
 from flask import jsonify
+import os
 
 from face_recognition_service.face_engine import FaceEngine
 
@@ -21,7 +22,7 @@ class CompareDistances(Resource):
 
         engine = FaceEngine()
 
-        with tempfile.NamedTemporaryFile() as tmp:
+        with tempfile.NamedTemporaryFile(delete=False) as tmp:
             tmp.write(args['unknown_dat'].read())
             tmp.flush()
             tmp.seek(0)
@@ -29,5 +30,8 @@ class CompareDistances(Resource):
             distances_json = engine.face_distance(unknown_encoding)
 
             filtered = {str(k): v for k, v in distances_json.items() if v <= args['tolerance']}
+
+            tmp.close()
+            os.unlink(tmp.name)
 
             return jsonify(filtered)

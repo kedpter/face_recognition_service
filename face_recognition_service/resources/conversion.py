@@ -22,13 +22,18 @@ class Conversion(Resource):
         args = parse.parse_args()
         engine = FaceEngine()
 
-        with tempfile.NamedTemporaryFile() as tmp:
+        with tempfile.NamedTemporaryFile(delete=False) as tmp:
             # with open('upload.jpg', 'wb') as tmp:
             file = args['face_image']
             tmp.write(file.read())
             tmp.flush()
 
             image = engine.load_image_file(tmp.name)
+
+            # fix tempfile bug
+            tmp.close()
+            os.unlink(tmp.name)
+
             encodings = engine.face_encodings(image)
             if len(encodings) == 0:
                 return {'success': 'false', 'reason': 'no face in image'}
