@@ -15,15 +15,16 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-'flask-restful >= 0.3.7',
-'face_recognition >= 1.2.3'
+    'flask-restful >= 0.3.7',
+    'face_recognition >= 1.2.3'
 ]
 
-setup_requirements = [ ]
+setup_requirements = []
 
-test_requirements = [ ]
+test_requirements = []
 
 here = os.path.abspath(os.path.dirname(__file__))
+
 
 def read(*parts):
     # intentionally *not* adding an encoding option to open, See:
@@ -61,16 +62,13 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
-    packages=find_packages(
-        include=[src_dirname],
-        # exclude=["contrib", "docs", "tests*", "tasks"],
-    ),
+    # packages=find_packages(),
+    packages=find_packages(include=src_dirname),
     entry_points={
         'console_scripts': [
             'face_recognition_service = face_recognition_service.cli:main',
         ],
     },
-    # package_data={'yourpackage': ['*.txt', 'path/to/resources/*.txt']},
     description="face recognition api service",
     install_requires=requirements,
     license="MIT license",

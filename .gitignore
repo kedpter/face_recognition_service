@@ -106,3 +106,4 @@ ENV/
 .DS_Store
 tests/*.dat
 face_recognition_service/static/convert_faces/*
+api.xmind
