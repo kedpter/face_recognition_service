@@ -4,8 +4,8 @@ import os
 
 
 def main():
-    app.debug = True
-    FaceEngine().debug = True
+    app.debug = False
+    FaceEngine().debug = False
     # app.config['DATABASE_NAME'] = 'library.db'
     host = os.environ.get('IP', '0.0.0.0')
     port = int(os.environ.get('PORT', 8080))

@@ -62,8 +62,7 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
-    # packages=find_packages(),
-    packages=find_packages(include=src_dirname),
+    packages=find_packages(),
     entry_points={
         'console_scripts': [
             'face_recognition_service = face_recognition_service.cli:main',
