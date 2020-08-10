@@ -104,6 +104,7 @@ ENV/
 .python-version
 
 .DS_Store
+*DS_Store
 tests/*.dat
 face_recognition_service/static/convert_faces/*
 api.xmind
