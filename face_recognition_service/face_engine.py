@@ -17,7 +17,7 @@ class FaceEngine:
         self.tolerance = 0.6
         self.enable_cnn = False
         self.__db = MemDatabase()
-        self.debug = True
+        self.debug = False
 
     @property
     def faces(self):

@@ -63,14 +63,14 @@ class TestEncodings(TestCase):
         with open(np_file, 'rb') as f:
             bytes = f.read()
         data = {
-            'id': 1,
+            'id': '1',
             'encoding_file': (io.BytesIO(bytes), '1.dat')
         }
         with app.test_request_context():
             response = self.client.post(api.url_for(FaceEncodingList),
                                         buffered=True, content_type='multipart/form-data', data=data)
             self.assertTrue(response.status_code, 200)
-            face_exists = any([x.id == 1 for x in engine.faces])
+            face_exists = any([x.id == '1' for x in engine.faces])
             self.assertTrue(face_exists)
 
 

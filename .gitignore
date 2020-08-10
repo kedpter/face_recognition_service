@@ -107,3 +107,4 @@ ENV/
 tests/*.dat
 face_recognition_service/static/convert_faces/*
 api.xmind
+.idea

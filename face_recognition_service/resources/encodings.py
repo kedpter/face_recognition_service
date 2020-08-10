@@ -23,7 +23,8 @@ class FaceEncodingList(Resource):
         add an encoding
         '''
         parse = reqparse.RequestParser()
-        parse.add_argument('id', type=int, required=True, location='form')
+        # parse.add_argument('id', type=int, required=True, location='form')
+        parse.add_argument('id', required=True, location='form')
         parse.add_argument(
             'encoding_file', required=True, type=werkzeug.datastructures.FileStorage, location='files')
         args = parse.parse_args()
