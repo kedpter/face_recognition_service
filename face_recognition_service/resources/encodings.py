@@ -7,6 +7,7 @@ from face_recognition_service.face_engine import FaceEngine
 from face_recognition_service.models.face import DbException
 import numpy as np
 import os
+import uuid
 
 
 class FaceEncodingList(Resource):
@@ -31,26 +32,46 @@ class FaceEncodingList(Resource):
 
         engine = FaceEngine()
 
-        with tempfile.NamedTemporaryFile(delete=False) as tmp:
+        filename = '{name}.tmp'.format(uuid.uuid1())
+        with open(filename, 'w') as tmp:
             tmp.write(args['encoding_file'].read())
-            tmp.flush()
-            tmp.seek(0)
-            face_encoding = np.load(tmp.name, allow_pickle=True)
 
-            tmp.close()
-            os.unlink(tmp.name)
+        face_encoding = np.load(filename, allow_pickle=True)
 
-            try:
-                engine.add_face(args['id'], face_encoding)
-            except DbException as e:
-                msg = {'message': str(e)}
-                return Response(
-                    response=json.dumps(
-                        msg
-                    ),
-                    status=500,
-                    mimetype="application/json"
-                )
+        os.unlink(filename)
+
+        try:
+            engine.add_face(args['id'], face_encoding)
+        except DbException as e:
+            msg = {'message': str(e)}
+            return Response(
+                response=json.dumps(
+                    msg
+                ),
+                status=500,
+                mimetype="application/json"
+            )
+
+        # with tempfile.NamedTemporaryFile(delete=False) as tmp:
+        #     tmp.write(args['encoding_file'].read())
+        #     tmp.flush()
+        #     tmp.seek(0)
+        #     face_encoding = np.load(tmp.name, allow_pickle=True)
+
+        #     tmp.close()
+        #     os.unlink(tmp.name)
+
+        #     try:
+        #         engine.add_face(args['id'], face_encoding)
+        #     except DbException as e:
+        #         msg = {'message': str(e)}
+        #         return Response(
+        #             response=json.dumps(
+        #                 msg
+        #             ),
+        #             status=500,
+        #             mimetype="application/json"
+        #         )
 
 
 class FaceEncoding(Resource):
