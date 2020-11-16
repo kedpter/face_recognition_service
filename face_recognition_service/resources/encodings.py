@@ -32,13 +32,15 @@ class FaceEncodingList(Resource):
 
         engine = FaceEngine()
 
-        filename = '{name}.tmp'.format(uuid.uuid1())
-        with open(filename, 'w') as tmp:
-            tmp.write(args['encoding_file'].read())
+        filename = '{name}.tmp'.format(name=uuid.uuid1())
 
-        face_encoding = np.load(filename, allow_pickle=True)
+        try:
+            with open(filename, 'wb') as tmp:
+                tmp.write(args['encoding_file'].read())
 
-        os.unlink(filename)
+            face_encoding = np.load(filename, allow_pickle=True)
+        finally:
+            os.unlink(filename)
 
         try:
             engine.add_face(args['id'], face_encoding)
