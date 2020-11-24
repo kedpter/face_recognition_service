@@ -8,6 +8,7 @@ from face_recognition_service.models.face import DbException
 import numpy as np
 import os
 import uuid
+from flask import send_file, current_app as app
 
 
 class FaceEncodingList(Resource):
@@ -32,7 +33,8 @@ class FaceEncodingList(Resource):
 
         engine = FaceEngine()
 
-        filename = '{name}.tmp'.format(name=uuid.uuid1())
+        filename = os.path.join(app.config['convert_faces_dir'], '{}.ecdtmp'.format(uuid.uuid1()))
+
 
         try:
             with open(filename, 'wb') as tmp:
